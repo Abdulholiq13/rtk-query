@@ -139,27 +139,33 @@ const Home = () => {
         </form>
       </div>
 
-      <div className="container py-4 ml-10">
+      {/* Users */}
+      <div className="container py-4 ml-10 w-full max-w-full">
         <div className="flex flex-col items-start justify-start">
-          <h2 className="text-4xl font-bold uppercase mb-10">Users</h2>
+          <h2 className="text-4xl font-bold uppercase mb-10 w-full break-words">Users</h2>
           {isLoading && <h3>Loading...</h3>}
           <div className="grid grid-cols-5 gap-6 w-full">
             {Array.isArray(data) &&
               data.map((user, inx) => (
                 <div
                   key={`${user.id}-${inx}`}
-                  className="group flex flex-col items-center justify-center overflow-hidden text-wrap gap-2 hover:shadow-3xl transition-all ease-in-out duration-200 cursor-pointer p-4 rounded-2xl"
+                  className="group items-center justify-center break-words text-wrap gap-2 hover:shadow-3xl transition-all ease-in-out duration-200 cursor-pointer p-4 rounded-2xl w-full"
                 >
                   <Link to={`/user/${user.id}`}>
-                    <img src={user.gender === "male" ? "/man.png" : "/woman.png"} alt={""} width={100} />
+                    <img
+                      className="block mx-auto mb-2"
+                      src={user.gender === "male" ? "/man.png" : "/woman.png"}
+                      alt={""}
+                      width={100}
+                    />
                   </Link>
                   <Link to={`/user/${user.id}`}>
-                    <h2 className="group-hover:underline underline-offset-2 text-lg text-start font-bold text-wrap">
+                    <h2 className="group-hover:underline underline-offset-2 text-center leading-[22px] text-base mb-2 font-bold break-words">
                       {user.fname}
                     </h2>
                   </Link>
-                  <p className="text-sm text-center">{user.job}</p>
-                  <p className="line-clamp-2 text-sm font-thin text-center">{user.bio}</p>
+                  <p className="text-sm text-center break-words">{user.job}</p>
+                  <p className="line-clamp-2 text-sm font-thin text-center break-words">{user.bio}</p>
 
                   <div className="grid grid-cols-2 items-center justify-between gap-2 mt-4">
                     <button
@@ -186,6 +192,7 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Update user */}
       {updateUserItem ? (
         <UpdateModal close={() => setUpdateUserItem(null)}>
           <form onSubmit={handleUpdateUser} className="flex flex-col gap-4">
