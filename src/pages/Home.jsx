@@ -1,18 +1,16 @@
 import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import UpdateModal from "../components/upadateModal/UpdateModal";
-import {
-  useCreateUsersMutation,
-  useDeleteUserMutation,
-  useGetUsersQuery,
-  useUpdateUserMutation,
-  useGetSingleUserQuery,
-} from "../context/api/userApi";
+import { useCreateUsersMutation, useDeleteUserMutation, useGetUsersQuery, useUpdateUserMutation } from "../context/api/userApi";
 import { Link } from "react-router-dom";
 
 const Home = () => {
   const [updateUserItem, setUpdateUserItem] = useState(null);
-  const { isLoading, data } = useGetUsersQuery();
+  const [pageSize, setPageSize] = useState(1);
+  const [limit, setLimit] = useState(10);
+
+  const { isLoading, data } = useGetUsersQuery({ pageSize: pageSize, limit: limit });
+  const isLoadMoreDisabled = data?.length < 10;
 
   const [createUser, { isLoading: createLoading }] = useCreateUsersMutation();
   const [deleteUser] = useDeleteUserMutation();
@@ -188,6 +186,23 @@ const Home = () => {
                   </div>
                 </div>
               ))}
+          </div>
+
+          <div className="flex gap-5 items-center justify-center w-full mt-10">
+            <button
+              className="bg-yellow-400 p-2 px-3 rounded-md text-white text-base transition-all ease-in duration-75 disabled:bg-yellow-200"
+              onClick={() => setPageSize((prev) => prev - 1)}
+              disabled={pageSize === 1 || isLoading}
+            >
+              Prev
+            </button>
+            <button
+              className="bg-yellow-400 p-2 px-3 rounded-md text-white text-base transition-all ease-in duration-75 disabled:bg-yellow-200"
+              onClick={() => setPageSize((prev) => prev + 1)}
+              disabled={isLoadMoreDisabled || isLoading}
+            >
+              Next
+            </button>
           </div>
         </div>
       </div>

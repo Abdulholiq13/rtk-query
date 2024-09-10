@@ -18,11 +18,15 @@ const DetailPage = () => {
           </div>
           <div>
             <h2 className="text-2xl">
-              Full name: {user?.fname} {user?.lname}
+              <span className="font-semibold">Full name: </span> {user?.fname} {user?.lname}
             </h2>
-            <p className="text-">Work: {user?.job}</p>
-            <p>Biography: {user?.bio}</p>
-            <p>Gender: {user?.gender}</p>
+            <p className="text-xl">
+              <span className="font-semibold">Full work: </span> {user?.job}
+            </p>
+            <p className="text-xl">
+              <span className="font-semibold">Biography: </span> {user?.bio}
+            </p>
+            <p className="text-xl">Gender: {user?.gender}</p>
             <div className="mt-10 flex gap-4">
               <button
                 onClick={() => navigate(-1)}

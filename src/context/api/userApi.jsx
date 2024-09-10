@@ -3,9 +3,8 @@ import { api } from "./index";
 export const userApi = api.injectEndpoints({
   endpoints: (build) => ({
     getUsers: build.query({
-      query: (params) => ({
-        url: "/users",
-        params,
+      query: ({ pageSize, limit }) => ({
+        url: `/users?page=${pageSize}&limit=${limit}`,
       }),
       providesTags: ["Users"],
     }),
