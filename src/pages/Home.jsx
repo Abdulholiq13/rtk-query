@@ -152,7 +152,7 @@ const Home = () => {
                   <Link to={`/user/${user.id}`}>
                     <img
                       className="block mx-auto mb-2"
-                      src={user.gender === "male" ? "/man.png" : "/woman.png"}
+                      src={user.gender === "male" ? "../../public/man.png" : "../../public/woman.png"}
                       alt={""}
                       width={100}
                     />
